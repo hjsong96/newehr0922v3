@@ -1,0 +1,285 @@
+@charset "UTF-8";
+
+@import
+   url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
+   ;
+
+* {
+   font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+   background-size:cover;
+   position: relative;
+   width: 1300px;
+   height: 100vh;
+   z-index: 1;
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+button {
+   width: 350px;
+   height: 50px;
+   border: 0;
+   background-color: #303F9F;
+   border-radius: 7px;
+   padding: 10px;
+   color: white;
+   font-weight: bold;
+}
+button:hover{
+   cursor: pointer;
+   background-color: #1A237E;
+}
+
+
+.signin_id, .signin_pw {
+   padding: 15px;
+   width: 350px;
+   height: 50px;
+   border: 1px solid #BDBDBD;
+   border-radius: 7px;
+   background-color: rgba(255, 255, 255, 0.5);
+   margin: 0 auto;
+}
+
+.saveID{
+   position: relative;
+   width: 15px;
+   height: 15px;
+   margin-right: 5px;
+   border-radius: 7px;
+   cursor: pointer;
+   
+}
+
+.loginBtn{
+   margin-top: 20px;
+}
+
+.login-form {
+   border: 1px solid #9E9E9E;
+   border-radius: 30px;
+   background-color: white;
+   background-color: rgba(255, 255, 255, 0.5);
+   box-shadow: 3px 3px 3px 3px #9E9E9E;
+   width: 500px;
+   height: 600px;
+   box-sizing: border-box; /* 박스 모델을 변경하여 border와 padding을 포함한 크기로 정의 */
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.login-second a {
+   text-decoration: none;
+   text-align: center;
+}
+
+.login-second a:hover{
+   font-weight: bold;
+   cursor: pointer;
+}
+
+.login-second {
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 100vh; /* 화면 높이에 따라 조절 */
+}
+
+/* 비밀번호 찾기 모달입니다. */
+.zzzPW {
+   text-align: center;
+}
+
+.zzzPW button{
+   width: 150px;
+   margin: 5px;
+}
+
+.idPW, .namePW, .errnPW {
+   font-size: 16px;
+   font-weight:bold;
+   margin-top: 10px;
+}
+
+.idPW-div, .namePW-div, .errnPW-div {
+   text-align: left;
+   padding-left: 100px;
+}
+
+.enamePW .pnum {
+   width: 100%; /* 입력 창의 너비를 100%로 설정 */
+   padding: 10px; /* 패딩을 추가하여 크기를 조절 */
+   font-size: 16px;
+   margin-top: 5px;
+}
+
+.errndivPW {
+   display: flex;
+   align-items: center;
+}
+
+.eidPW, .enamePW, .pnum{
+   width: 500px;
+   padding: 10px; /* 패딩을 추가하여 크기를 조절 */
+   margin-bottom: 10px;
+   border: 0;
+   border-bottom: 1px solid #BDBDBD;
+}
+
+.errorInfo {
+   margin-left: 10px;
+   font-size: 16px;
+   color: red;
+}
+
+.fbtnPW {
+   background-color: #007bff;
+   color: white;
+   padding: 10px 20px;
+   font-size: 18px;
+   border: none;
+   cursor: pointer;
+   margin-top: 20px;
+}
+
+.PWResult {
+   font-size: 18px;
+   margin-top: 20px;
+}
+
+.login-result {
+   text-align: center;
+   margin-top: 20px;
+}
+/* 비밀번호 찾기 모달 끝입니다. */
+
+/* 아이디 찾기 모달 부분입니다. */
+/* 모달 스타일 */
+.modal {
+   display: none;
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: rgba(0, 0, 0, 0.5);
+   z-index: 9999;
+   overflow: auto;
+}
+
+.modal-dialog {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-height: 100%;
+}
+
+.modal-content {
+   background-color: white;
+   padding: 20px;
+   border-radius: 5px;
+}
+
+/* 추가 스타일 */
+.header {
+   text-align: center;
+   margin-top: 20px;
+}
+
+.title {
+   font-size: 24px;
+   margin-bottom: 20px;
+}
+
+.checkID {
+   text-align: center;
+}
+
+/* 모달 내용 가운데 정렬을 위한 스타일 */
+.zzz {
+   text-align: center;
+}
+
+.zzz button{
+   width: 150px;
+   margin: 5px;
+}
+.nameh5, .errnh5 {
+   font-size: 16px;
+   font-weight: bold;
+}
+
+.ename{
+   width: 500px;
+   padding: 10px; /* 패딩을 추가하여 크기를 조절 */
+   margin-bottom: 10px;
+   border: 0;
+   border-bottom: 1px solid #BDBDBD;
+}
+.errn, .errn2 {
+   margin: 5px;
+   width: 240px;
+   padding: 10px; /* 패딩을 추가하여 크기를 조절 */
+   border: 0;
+   border-bottom: 1px solid #BDBDBD;
+}
+
+.nameh5-div, .errnh5-div{
+   text-align: left;
+   padding-left: 100px;
+}
+
+.errndiv {
+   display: flex;
+   align-items: center;
+}
+
+.fbtn {
+   background-color: #007bff;
+   color: white;
+   padding: 10px 20px;
+   border: none;
+   cursor: pointer;
+   margin-top: 10px;
+}
+
+.IDResult {
+   margin-top: 20px;
+}
+
+.login-result {
+   text-align: center;
+   margin-top: 20px;
+}
+
+.saveCookie {
+   background-color: #007bff;
+   color: white;
+   padding: 10px 20px;
+   border: none;
+   cursor: pointer;
+   margin-top: 10px;
+}
+
+/* 쿠키 저장 버튼 스타일 */
+.saveCookie {
+   background-color: green; /* 원하는 색상으로 변경 */
+}
+
+.modal-content {
+   background-color: white;
+   padding: 20px;
+   border-radius: 5px;
+   min-height: 350px; /* 적절한 내용 높이 조절 */
+}
+/* 아이디 찾기 모달 끝입니다. */

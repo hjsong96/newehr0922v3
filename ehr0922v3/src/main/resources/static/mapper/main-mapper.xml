@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ehr.web.main.MainDAO">
+<select id="IDresult" parameterType="Map" resultType="Integer">
+SELECT COUNT(*)
+FROM employee
+WHERE eid = #{id}
+
+</select>
+<select id="PWresult" parameterType="Map" resultType="Integer">
+SELECT COUNT(*)
+FROM employee
+WHERE eid = #{id} AND epw = #{pw}
+</select>
+
+<select id="loginCheck" parameterType="Map" resultType="Map">
+SELECT edept, eno, ename, ecount, egrade
+FROM employee
+WHERE eid = #{id} AND epw = #{pw}
+</select>
+<select id="eCount" parameterType="Map" resultType="Integer">
+SELECT ecount
+FROM employee
+WHERE eid = #{id}
+</select>
+<update id="eCountReset" parameterType="Map">
+UPDATE employee SET ecount = 0
+WHERE eid =#{id}
+</update>
+<update id="eCountPlus" parameterType="Map">
+UPDATE employee SET ecount = ecount+1
+WHERE eid =#{id}
+</update>
+<select id="login" parameterType="String" resultType="Map">
+SELECT *
+FROM employee
+WHERE eid=#{eid}
+</select>
+<update id="ecountPW" parameterType="Map">
+UPDATE employee SET epw = #{uuid}
+WHERE eid = #{id}
+</update>
+
+<insert id="join" parameterType="Map">
+		INSERT into employee (eid, epw, ename, errn, eemail, eemail2, ecertificate, edept, egrade, ehiredate, eaddr, eaddr2, ebirth, egender, ephoneno, ebank, eaccount, eimg)
+		values(#{eid}, #{epw}, #{ename}, #{errn}, #{eemail}, #{eemail2}, #{ecertificate}, #{edept}, #{egrade}, #{ehiredate}, #{eaddr}, #{eaddr2}, #{ebirth}, #{egender}, #{ephoneno}, #{ebank}, #{eaccount}, #{realFile})
+	</insert>
+	
+	<select id="eidcheck" parameterType="String" resultType="Integer">
+		select count(*) from employee
+		where eid=#{eid}
+	</select>
+	
+	<select id="eemailcheck" parameterType="String" resultType="Integer">
+		select count(*) from employee
+		where eemail=#{eemail}
+	</select>
+	<select id="newMember" resultType="Map">
+	SELECT eimg, edept, ename, ehiredate
+	FROM employee
+	ORDER BY ehiredate
+	DESC
+	LIMIT 0,5
+	</select>
+<update id="mypageupdate" parameterType="Map" >
+      UPDATE employee
+      SET 
+      <if test="realFile != null">
+      eimg=#{realFile},
+      </if>
+      ephoneno=#{ephoneno},
+      eaddr=#{eaddr},
+      eaddr2=#{eaddr2}
+      WHERE eid=#{eid}
+   </update>
+   
+    <select id="findID" parameterType="Map" resultType="Map">
+   select eid, ename
+   from employee
+   where errn =#{errn} AND ename=#{ename}
+   </select>
+   <select id="findPW" parameterType="Map" resultType="Map">
+   SELECT COUNT(*) as count, eid, ename, eemail2
+   FROM employee
+   WHERE eid =#{idPW} AND ename = #{name} AND ephoneno =#{pnum}
+   </select>
+   <update id="changePW" parameterType="Map">
+   UPDATE employee SET epw = #{uuid}
+   where ename=#{ename} AND eid=#{eid}
+   </update>
+
+<select id="memberlist" resultType="Map">
+select * from employee
+</select>
+
+<update id="egradeChange" parameterType="Map">
+UPDATE employee SET egrade=#{egrade} WHERE  eno=#{eno}
+</update>
+
+<update id="edeptChange" parameterType="Map">
+UPDATE employee SET edept=#{edept} WHERE  eno=#{eno}
+</update>
+
+<select id="checkPW" parameterType="Map" resultType="Integer">
+SELECT COUNT(*) as count
+FROM employee
+WHERE eno=#{eno} AND epw =#{pw}
+</select>
+<update id="newPW" parameterType="Map">
+UPDATE employee
+SET epw = #{pw}
+WHERE eno = #{eno}
+</update>
+<select id="searchPW" parameterType="Map" resultType="Integer">
+SELECT COUNT(*) as count
+FROM employee
+WHERE eno=#{eno} AND epw =#{pw}
+</select>
+</mapper>

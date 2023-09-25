@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ehr.web.board.BoardDAO">
+<select id="acount">
+SELECT COUNT(*)
+FROM annonyboard
+where abdel = 1
+</select>
+
+<select id="alist" parameterType="Map" resultType="Map">
+SELECT ff.*, COALESCE(cc.commentcount, 0) AS commentcount
+FROM (
+    SELECT CAST(@ROWNUM:=@ROWNUM+1 AS UNSIGNED) AS rowNum, bb.*
+    FROM (
+        SELECT b.abno, b.abtitle, b.abdate, b.abread, b.abdel, b.abwrite, b.eno
+        FROM annonyboard b
+    ) bb, (SELECT @ROWNUM:=0) AS R
+    WHERE abdel=1
+    ORDER BY bb.abno ASC
+) as ff
+JOIN employee e ON ff.eno=e.eno
+LEFT JOIN (
+    SELECT abno, COUNT(*) AS commentcount
+    FROM comments
+    WHERE cdel = 1
+    GROUP BY abno
+) AS cc ON ff.abno = cc.abno
+ORDER BY abno DESC
+LIMIT #{offset}, #{pageSize}
+</select>
+<insert id="awrite">
+	INSERT INTO annonyboard 
+	(abtitle, abwrite, abcontent, eno) 
+	VALUES(#{abtitle},#{abwrite},#{abcontent},#{eno})
+	
+</insert>
+<select id="adetail" parameterType="Integer" resultType="Map">
+SELECT ff.*
+FROM(
+SELECT CAST(@ROWNUM:=@ROWNUM+1 AS UNSIGNED) AS rowNum, bb.*
+FROM (SELECT  b.abno, b.abtitle, b.abdate, b.abread, b.abdel, b.abwrite, b.abcontent, b.eno
+FROM annonyboard b) bb, (SELECT @ROWNUM:=0) AS R
+WHERE bb.abdel=1
+ORDER BY bb.abno ASC
+) as ff JOIN employee e ON ff.eno=e.eno
+WHERE rowNum =#{num}
+</select>
+<update id="areadUp" parameterType="Integer">
+UPDATE annonyboard
+SET abread = abread+1
+where abno =#{abno}
+</update>
+<update id="adel" parameterType="Integer">
+update annonyboard
+set abdel = 0
+where abno = #{abno}
+</update>
+<update id="adetailUp" parameterType="Map">
+UPDATE annonyboard
+SET abtitle = #{abtitle}, abcontent=#{abcontent}
+WHERE abno = #{abno}
+</update>
+<select id="acheckEno" parameterType="Map" resultType="Integer">
+SELECT COUNT(*)
+FROM annonyboard
+WHERE abno=#{abno} AND eno =#{eno}
+</select>
+
+<select id="nlist" resultType="Map">
+	      SELECT n.*, e.ename
+		  FROM notice n
+		  JOIN employee e ON n.eno = e.eno
+		  where ndel=1
+		  ORDER BY n.nno DESC
+		  LIMIT 0, 10
+    </select>
+    
+    <select id="ndetail" parameterType="Integer" resultType="Map">
+    	SELECT n.nno, n.ntitle, n.ncontent, n.ndate, n.nread,
+        n.norifile, n.nrealfile, n.eno, e.ename
+   		FROM notice n
+    	JOIN employee e ON n.eno = e.eno
+    	WHERE n.ndel = 1 AND n.nno = #{nno}
+    </select>
+    
+    <insert id="nwrite" parameterType="Map">
+    	INSERT into notice (ntitle, ncontent, eno, ndel)
+    	values(#{ntitle}, #{ncontent}, (SELECT eno FROM employee WHERE eid=#{eid}),1)
+    </insert>
+    
+    <update id="ndetailDel" parameterType="Map" >
+ 		UPDATE notice 
+ 		SET ndel=0 
+ 		where nno=#{nno} AND eno=(SELECT eno FROM employee WHERE eid=#{eid})
+ 	</update>
+ 	
+ 	<update id="ndetailUp" parameterType="Map" >
+      UPDATE notice
+      SET 
+      ntitle=#{ntitle},ncontent=#{ncontent}
+      WHERE nno=#{nno}
+   </update>
+   
+    <select id="getCount" resultType="int">
+        SELECT count(*) FROM notice
+    </select> 
+    
+     <select id="getPage" resultType="Map" parameterType="Map">
+		SELECT notice.*, employee.ename, CAST(@rownum := @rownum + 1 AS UNSIGNED) AS rowNum
+		FROM notice
+		LEFT JOIN employee ON notice.eno = employee.eno
+		JOIN (SELECT @rownum := 0) AS r
+		where ndel=1
+		ORDER BY rowNum DESC
+		LIMIT #{offset}, #{pageSize}
+    </select>
+    
+    <update id="ndel" parameterType="Integer">
+		update notice
+		set ndel = 0
+		where nno = #{no}
+	</update>
+
+<select id="ncheckEno" parameterType="Map" resultType="Integer">
+	SELECT COUNT(*)
+	FROM notice
+	WHERE nno=#{nno} AND eno =#{eno}
+</select>
+
+<update id="nreadUp" parameterType="Integer">
+UPDATE notice
+SET nread = nread+1
+where nno =#{nno}
+</update>
+
+<select id="commentList" parameterType="Integer" resultType="Map">
+SELECT *
+FROM comments
+WHERE abno = #{abno} AND cdel = 1
+</select>
+<select id="commentCount" parameterType="Integer" resultType="Integer">
+SELECT COUNT(*) AS COUNT
+FROM comments
+WHERE abno = #{abno} AND cdel = 1
+</select>
+
+<insert id="comment" parameterType="Map">
+INSERT INTO comments (ccomment, cwrite, eno, abno, csecret <if test="c_self != null">,cself</if>)
+VALUES(#{comment}, #{writer}, #{eno}, #{abno}, #{secret}<if test="c_self != null">, 0</if>)
+</insert>
+
+<update id="cedit" parameterType="Map">
+UPDATE comments
+SET ccomment=#{comment}
+WHERE abno = #{abno} AND cno=#{cno}
+</update>
+
+<update id="cdel" parameterType="Map">
+UPDATE comments
+SET cdel = 0
+WHERE abno = #{abno} AND cno = #{cno}
+</update>
+
+<insert id="report" parameterType="Map">
+INSERT INTO report (rreporter, abno, rcontent, rreported, rdetail)
+VALUES(#{reporter}, #{abno}, #{rcontent}, #{reported}, #{rdetail})
+</insert>
+
+<select id="reportList" resultType="Map">
+SELECT *
+FROM report
+where rresult = 0
+</select>
+
+<select id="reportDetail" parameterType="Integer" resultType="Map">
+SELECT abtitle, abcontent, abwrite, abdate
+FROM annonyboard
+WHERE abno = #{abno}
+</select>
+
+<update id="reportAgree" parameterType="Integer">
+UPDATE report
+SET rresult = 1
+WHERE abno = #{abno}
+</update>
+
+<update id="eboardCount" parameterType="Integer">
+UPDATE employee
+SET eboardcount = eboardcount+1
+WHERE eno = #{rreported}
+</update>
+
+<update id="reportReject" parameterType="Integer">
+UPDATE report
+SET rresult = 2
+WHERE abno = #{abno}
+</update>
+
+<select id="reportCount" parameterType="Integer" resultType="Integer">
+SELECT COUNT(*) AS COUNT
+FROM report
+WHERE abno = #{abno} AND rresult = 0
+</select>
+
+<select id="eboardCount2" parameterType="String" resultType="Integer">
+SELECT eboardcount
+FROM employee
+WHERE eid = #{eid}
+</select>
+
+</mapper>

@@ -1,0 +1,107 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+body{
+   background-color: #FFF3E0;
+   font-family: 'Noto Sans KR', sans-serif;
+}
+
+.title{
+   padding-left: 35px;
+}
+
+th{
+   border-bottom: 1px solid #BDBDBD;
+   width: 200px;
+   height: 20px;
+   padding: 10px;
+}
+
+td{
+   border-bottom: 1px solid #BDBDBD;
+   width: 200px;
+   height: 30px;
+   padding: 10px;
+   text-align: center;
+}
+.atList{   
+   width: 1100px;
+   height: 1000px;
+   margin: 0 auto;
+}
+
+.atList2{
+   width: 1000px;
+   height: 800px;
+   margin: 0 auto;
+   background-color: white;
+   padding: 20px;
+   border-radius: 15px;
+   border: 1px solid #FFE0B2;
+}
+.div-btn{
+   margin: 10px;
+   padding: 10px;
+   text-align: right;
+   border-bottom: 1px solid #FFE0B2;
+}
+
+button{
+   border: 0;
+   background-color: #303F9F;
+   border-radius: 7px;
+   padding: 7px;
+   color: white;
+   font-weight: bold;
+   font-family: 'Noto Sans KR', sans-serif;
+}
+button:hover{
+   cursor: pointer;
+   background-color: #1A237E;
+}
+
+.table{
+   border-collapse: collapse;
+   margin: auto;
+   text-align: center;
+   table-layout: fixed;
+}
+.page-div{
+	text-align: center;
+	margin-top: 30px;
+}
+.page_wrap {
+   text-align:center;
+   font-size:0;
+   margin-top : 15px;
+ }
+.page_nation {
+   display:inline-block;
+}
+.page_nation a:hover {
+   background-color: #E8EAF6;
+   cursor: pointer;
+   font-weight: bolder;
+}
+
+.page_nation a {
+   display:block;
+   margin:0 3px;
+   float:left;
+   border:1px solid #e6e6e6;
+   width:28px;
+   height:28px;
+   line-height:28px;
+   text-align:center;
+   font-size:13px;
+   color:black;
+   text-decoration:none;
+}
+
+
+.page_nation img{
+   vertical-align: middle;
+}
+
+.page_left_wrap{
+   float: left
+}

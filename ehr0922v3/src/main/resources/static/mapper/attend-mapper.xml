@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ehr.web.attend.AttendDAO">
+	<select id="attendList" parameterType="Map" resultType="com.ehr.web.attend.AttendDTO">
+      SELECT @ROWNUM:=@ROWNUM+1 AS rowNum, atregno, atregdate, atregrestdate, atregsts, atregacpt, atregcontent, atregcomment, ename, eno, edept, egrade 
+      FROM atregisterview, (SELECT @ROWNUM:=0) AS R
+      <where>
+      eid = #{eid}
+         <if test="selected == 0">AND atregdate LIKE CONCAT('%', #{atregdate}, '%') </if>
+         <if test="selected == 1">AND atregsts = #{atregsts} </if>
+         <if test="selected == 2">AND atregacpt LIKE CONCAT('%', #{atregacpt}, '%') </if>
+         <if test="selected == 3">AND atregcontent LIKE CONCAT('%', #{atregcontent}, '%') </if>
+         <if test="selected == 4">AND atregcomment LIKE CONCAT('%', #{atregcomment}, '%') </if>
+      </where>
+      ORDER BY rowNum DESC LIMIT #{offset}, #{pageSize}
+   </select>
+   
+   <select id="attendListAll" parameterType="Map" resultType="com.ehr.web.attend.AttendDTO">
+      SELECT @ROWNUM:=@ROWNUM+1 AS rowNum, atregno, atregdate, atregrestdate, atregsts, atregacpt, atregcontent, ename, eno, edept, egrade, atregcomment
+      FROM atregisterview, (SELECT @ROWNUM:=0) AS R 
+      <where>
+         <if test="selected == 0">AND atregdate LIKE CONCAT('%', #{atregdate}, '%') </if>
+         <if test="selected == 1">AND egrade LIKE CONCAT('%', #{egrade}, '%') </if>
+         <if test="selected == 2">AND atregsts = #{atregsts} </if>
+         <if test="selected == 3">AND atregacpt LIKE CONCAT('%', #{atregacpt}, '%') </if>
+         <if test="selected == 4">AND atregcontent LIKE CONCAT('%', #{atregcontent}, '%') </if>
+         <if test="selected == 5">AND atregcomment LIKE CONCAT('%', #{atregcomment}, '%') </if>
+      </where>
+      ORDER BY rowNum DESC LIMIT #{offset}, #{pageSize}
+   </select>
+	
+	<insert id="atapplication" parameterType="com.ehr.web.attend.AttendDTO">
+		INSERT INTO atregister (atregrestdate, atregsts, atregacpt, atregcontent, eno) VALUES (#{atregrestdate}, #{atregsts}, 0, #{atregcontent}, (SELECT eno FROM employee WHERE eid = #{eid}))
+	</insert>
+	
+	<update id="atcancel" parameterType="Integer">
+		UPDATE atregister SET atregacpt = 2 WHERE atregno = #{atregno}
+	</update>
+	
+	<select id="attendView" parameterType="Integer" resultType="com.ehr.web.attend.AttendDTO">
+		SELECT atregno, atregdate, atregrestdate, atregsts, atregacpt, atregcontent, ename, eno, edept, egrade FROM atregisterview WHERE atregno = #{atregno}
+	</select>
+	
+	<update id="attendEdit" parameterType="Map">
+		UPDATE atregister SET atregrestdate = #{atregrestdate}, atregsts = #{atregsts}, atregcontent = #{atregcontent}, atregdate = (SELECT CURDATE()) WHERE eno = (SELECT eno FROM employee WHERE eid = #{eid}) AND atregno = #{atregno}
+	</update>
+	
+	<select id="getCount" parameterType="Map" resultType="Integer">
+        SELECT count(*) FROM atregister 
+        <where>
+      eno = (SELECT eno FROM employee WHERE eid = #{eid})
+         <if test="searchData != null and searchData != ''">
+         <if test="searchData == 0">AND atregdate LIKE CONCAT('%', #{atregdate}, '%') </if>
+         <if test="searchData == 1">AND atregsts LIKE CONCAT('%', #{atregsts}, '%') </if>
+         <if test="searchData == 2">AND atregacpt LIKE CONCAT('%', #{atregacpt}, '%') </if>
+         <if test="searchData == 3">AND atregcontent LIKE CONCAT('%', #{atregcontent}, '%') </if>
+         <if test="searchData == 4">AND atregcomment LIKE CONCAT('%', #{atregcomment}, '%') </if></if>
+      </where>      
+    </select>
+    
+    <select id="getCountAll" parameterType="Map" resultType="Integer">
+        SELECT count(*) FROM atregisterview
+        <where>
+         <if test="searchData != null and searchData != ''">
+         <if test="searchData == 0">AND atregdate LIKE CONCAT('%', #{atregdate}, '%') </if>
+         <if test="searchData == 1">AND egrade LIKE CONCAT('%', #{egrade}, '%') </if>
+         <if test="searchData == 2">AND atregsts LIKE CONCAT('%', #{atregsts}, '%') </if>
+         <if test="searchData == 3">AND atregacpt LIKE CONCAT('%', #{atregacpt}, '%') </if>
+         <if test="searchData == 4">AND atregcontent LIKE CONCAT('%', #{atregcontent}, '%') </if>
+         <if test="searchData == 5">AND atregcomment LIKE CONCAT('%', #{atregcomment}, '%') </if></if>
+      </where>
+    </select>
+    
+    <select id="seTime" parameterType="Integer" resultType="Map">
+		SELECT * FROM atmanagement WHERE eno = #{eno}
+	</select>
+	
+	<insert id="atmanageInsert" parameterType="Map">
+		INSERT INTO atmanagement (atmgsts, eno) 
+		VALUES (#{atmgsts}, (SELECT eno FROM employee WHERE eid=#{eid}))
+	</insert>
+	
+	<update id="atmanageUpdate" parameterType="Map">
+		UPDATE atmanagement
+		SET atmgend = NOW() 
+		WHERE atmgno = #{atmgno} 
+		AND eno = (SELECT eno FROM employee WHERE eid=#{eid})
+	</update>
+	
+	<select id="noList" parameterType="Map" resultType="Integer">
+		SELECT atmgno FROM atmanagement WHERE atmgdate = (SELECT CURDATE()) AND eno = (SELECT eno FROM employee WHERE eid=#{eid})
+	</select>
+	
+	<select id="timeSelect" parameterType="Map" resultType="Map">
+      SELECT atmgdate, atmgstr, atmgend, ename, atmgsts FROM atmanagementview WHERE eno = (SELECT eno FROM employee WHERE eid=#{eid})
+   </select>
+   
+   <select id="nowResult" resultType="Map">
+		SELECT atmgdate, atmgstr, atmgend FROM atmanagementview WHERE atmgdate = DATE_FORMAT(NOW(), '%y-%m-%d') AND eno = (SELECT eno FROM employee WHERE eid=#{eid})
+	</select>
+   
+   <update id="atApproval">
+    	UPDATE atregister SET atregacpt = 1 WHERE atregno = #{atregno}
+    </update>
+    
+    <update id="atNotApproval">
+    	UPDATE atregister SET atregacpt = 3, atregcomment = CONCAT('반려사유 : ', #{atregcomment}) WHERE atregno = #{atregno}
+    </update>
+    
+    <select id="calList" parameterType="Map" resultType="Map">
+    	SELECT * FROM atmanagementview WHERE eno = (SELECT eno FROM employee WHERE eid=#{eid})
+    </select>
+</mapper>

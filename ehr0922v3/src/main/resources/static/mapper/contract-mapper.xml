@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ehr.web.salary.ContractDAO">
+
+	<select id="clist" parameterType="Map" resultType="Map">
+		SELECT * FROM contract WHERE eno=#{eno} ORDER BY cno DESC;
+	</select>
+	
+	<select id="elist" parameterType="Map" resultType="Map">
+		SELECT * FROM employee e JOIN contract c ON e.eno=c.eno WHERE e.eno=#{eno} AND cno=#{cno} AND cstrdate=#{cstrdate};
+	</select>
+	
+	<select id="clist2" parameterType="Map" resultType="Map">
+		SELECT * FROM contract c JOIN employee e ON e.eno=c.eno WHERE e.eno=#{eno} AND cno=#{cno} AND cstrdate=#{cstrdate};
+	</select>
+	
+	<update id="aggrCheck" parameterType="Map">
+		UPDATE contract SET cagree=#{agree2}, cstrdate=#{acstrdate2}, cenddate=#{acenddate2}, eno=#{eno}, cagreedate=NOW()
+		WHERE cno=#{acno2};
+	</update>
+	
+	<select id="slist" parameterType="Map" resultType="Map">
+		SELECT * 
+		FROM salary
+		WHERE eno=#{eno} AND scstrdate=#{cstrdate} AND scenddate=#{cenddate} ORDER BY sdate LIMIT 1;
+	</select>
+	
+	<select id="adclist" parameterType="Map" resultType="Map">
+		SELECT * FROM contract c JOIN employee e ON e.eno=c.eno
+		<where>
+			<if test="cstrdate != null">AND cstrdate LIKE CONCAT('%', #{cstrdate}, '%') </if>
+			<if test="cenddate != null">AND cenddate LIKE CONCAT('%', #{cenddate}, '%') </if>
+			<if test="edept != null">AND edept LIKE CONCAT('%', #{edept}, '%') </if>
+			<if test="egrade != null">AND egrade LIKE CONCAT('%', #{egrade}, '%') </if>
+			<if test="estate != null">AND estate LIKE CONCAT('%', #{estate}, '%') </if>
+			<if test="eid != null">AND eid LIKE CONCAT('%', #{eid}, '%') </if>
+			<if test="ename != null">AND ename LIKE CONCAT('%', #{ename}, '%') </if>
+			<if test="cagree != null">AND cagree LIKE CONCAT('%', #{cagree}, '%') </if>
+		</where>
+		ORDER BY cno DESC LIMIT 0, 10; 
+	</select>
+
+	<delete id="deleteRows2" parameterType="List">
+	    DELETE FROM contract WHERE cno IN 
+	    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	    </foreach>
+	</delete>
+	
+	<select id="searchEmp2" parameterType="Integer" resultType="Map">
+        SELECT ename, edept, egrade, estate, eemail FROM employee WHERE eid=#{eid};
+    </select>
+    
+    <select id="eidList" resultType="Map">
+        SELECT eid FROM employee;
+    </select>
+    
+    <insert id="save" parameterType="Map"> 
+	    INSERT INTO contract (cstrdate, cenddate, cagree, eno) 
+	    VALUES (#{cstrdate}, #{cenddate}, #{cagree2}, (SELECT eno FROM employee WHERE eid=#{eid}));
+	</insert>
+	
+</mapper>

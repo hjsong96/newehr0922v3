@@ -1,0 +1,194 @@
+@import
+url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+* {
+   font-family: 'Noto Sans KR', sans-serif;
+}
+	 
+h1{
+	text-align: center;
+}
+
+.pic, .eimg{
+	margin: auto;
+    display: block;
+    border-radius: 65px;
+    border: 1px solid #BDBDBD;
+}
+
+.nimg{
+	margin: 0 auto;
+    display: block;
+    width: 80px;
+  	height: 80px;
+  	object-fit: cover;
+  	border-radius: 0px;
+  	margin-bottom: 10px;
+}
+
+.nimg:hover{
+	cursor: pointer;
+}
+
+.item{
+    min-height: 300px;
+    border : 1px solid #BDBDBD;
+   box-shadow: 2px 2px 2px 2px #E0E0E0;
+    border-radius: 20px;
+}
+
+.flexbox {
+	width:1500px;
+  display: flex;
+  justify-content: space-between; /* 아이템 사이의 간격을 균등하게 분배 */
+  flex-wrap: wrap; /* 필요한 경우 아이템들을 여러 행에 나누도록 설정 */
+}
+
+.flexbox .item {
+  flex: 1; /* 모든 아이템이 동일한 공간을 가지도록 설정 */
+  margin: 10px; /* 아이템 간의 간격을 조절할 수 있습니다. */
+  border: 1px solid #ccc; /* 아이템의 테두리를 추가하거나 원하는 스타일을 적용합니다. */
+  padding: 55px; /* 내용 주위에 여백을 설정할 수 있습니다. */
+  box-sizing: border-box; /* 테두리와 여백을 포함하여 요소의 크기를 계산합니다. */
+}
+.nameset1{
+	font-size: 15px;
+	text-align: center;
+}
+
+.nameset2{
+	font-size: 18px;
+	text-align: center;
+	margin-bottom:5px;
+	color: #1A237E;
+}
+
+.nameset3{
+	font-size: 30px;
+	text-align: center;
+	margin-bottom:5px;
+	color: #1A237E;
+}
+.nameset4{
+	font-size: 15px;
+	text-align: center;
+	margin-bottom:5px;
+	color: #424242;
+}
+.nameset5{
+	font-size: 15px;
+	
+}
+
+.nameset6{
+	font-size: 15px;
+	text-align: center;
+}
+.nameset7{
+	font-size: 30px;
+	text-align: center;
+	margin-bottom:20px;
+}
+
+.nameset8{
+	padding-top:20px;
+	font-size: 20px;
+	text-align: center;
+	color: #424242;
+}
+
+.nameset9{
+	padding-top:10px;
+	font-size: 15px;
+	text-align: center;
+	color: #424242;
+}
+
+.myinfo{
+	text-align:center;
+}
+	 
+.eimg{
+	border-radius: 100px;
+	width:150px;	
+	height:150px;
+}
+
+.pic{
+	border-radius: 100px;
+}
+
+
+.mypage{
+	margin-bottom:5px;
+	font-size: 20px;
+}
+
+.mypage:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+.changePW:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    cursor: pointer;
+}
+
+.tdtitle:hover{
+    text-decoration: underline;
+    text-decoration-thickness: 1px;	
+}
+.item4{
+	width:400px;
+    border : 2px solid #e2e2e2;
+    border-radius: 20px;
+	margin: 10px; /* 아이템 간의 간격을 조절할 수 있습니다. */
+	padding: 45px; /* 내용 주위에 여백을 설정할 수 있습니다. */
+	box-shadow: 2px 2px 2px 2px #E0E0E0;
+}
+
+.notice {
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    margin-top: -20px;
+    font-size: 30px;
+    color: #424242;
+}
+
+.trn{
+	border-bottom: 1px solid #c4c4c4;
+}
+table{
+	width:100%;
+	text-align: left;
+   table-layout: fixed;
+}
+td {
+    padding: 5px 10px; /* 셀 내부 여백 설정 */
+    font-size:15px;
+    table-layout: fixed;
+   overflow:hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   table-layout: fixed;
+}
+/* .nameset5 내부의 <table> 요소에 스타일을 적용 */
+
+/* 제목과 등록일 헤더(th) 요소의 스타일 설정 */
+.nameset5 .tdndate2 {
+    text-align: left; /* 제목은 왼쪽 정렬 */
+}
+
+.tdndate2 {
+    font-size: 12px;
+}
+
+.nameset_title{
+	font-weight: bold;
+    display: block;
+    text-align: center;
+    margin-bottom: 1px;
+    margin-top: -20px;
+    font-size: 30px;
+    color: #424242;
+}

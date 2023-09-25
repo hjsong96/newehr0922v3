@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ehr.web.approval.ApprovalDAO">
+	<select id="approval"
+		resultType="com.ehr.web.approval.ApprovalDTO"
+		parameterType="com.ehr.web.approval.ApprovalDTO">
+		SELECT eno, ename, egrade, edept
+		FROM employee
+		WHERE egrade<![CDATA[>#{egrade}]]>
+	</select>
+	<insert id="approvalInsert"
+		parameterType="com.ehr.web.approval.ApprovalDTO"
+		useGeneratedKeys="true" keyProperty="apno" keyColumn="apno">
+		INSERT INTO
+		approval (aplist, aptitle, apcontent, aprealfile, eno)
+		VALUES
+		(#{aplist}, #{aptitle}, #{apcontent}, #{aprealfile}, #{eno})
+	</insert>
+	<insert id="apperson" parameterType="Map">
+		INSERT INTO apperson (apno,
+		apperson)
+		VALUES (#{apno}, #{apperson});
+	</insert>
+
+	<select id="approvalBoard"
+		parameterType="com.ehr.web.approval.ApprovalDTO"
+		resultType="com.ehr.web.approval.ApprovalDTO">
+		SELECT apno, aptitle, apcontent, aplist, 
+		aprealfile, apdate
+		FROM approval
+		WHERE eno = #{eno}
+		ORDER BY apdate DESC
+	</select>
+	<select id="approvalperson" resultType="Map">
+		SELECT a.apno,
+		a.apperson, a.apacptdetail, a.count, e.ename
+		FROM apperson a
+		JOIN
+		employee e
+		ON a.apperson = e.eno
+	</select>
+	<select id="approvalDetail" parameterType="Integer"
+		resultType="java.util.LinkedHashMap">
+		SELECT a.apno, a.apdate, a.aptitle, a.apcontent, a.aplist,
+		a.aprealfile, a.apmemo, e.eno, e.ename
+		FROM approval a
+		JOIN employee e
+		ON a.eno = e.eno
+		WHERE apno=#{apno}
+	</select>
+	<select id="appersondetail" parameterType="Integer"
+		resultType="java.util.LinkedHashMap">
+		SELECT a.apno, a.apperson, a.apacptdetail, a.count,
+		e.ename, e.edept, e.egrade
+		FROM apperson a
+		JOIN employee e
+		ON a.apperson
+		= e.eno
+		WHERE apno=#{apno}
+	</select>
+
+	<update id="revise"
+		parameterType="com.ehr.web.approval.ApprovalDTO">
+		UPDATE approval
+		SET apcontent=#{apcontent},
+		apmemo=#{apmemo}
+		WHERE apno=#{apno}
+	</update>
+	<delete id="deleteForInsert"
+		parameterType="com.ehr.web.approval.ApprovalDTO">
+		DELETE FROM apperson
+		WHERE apno=#{apno}
+	</delete>
+	<insert id="InsertForRevise" parameterType="Map">
+		INSERT INTO apperson
+		(apno, apperson)
+		VALUES (#{apno}, #{apperson});
+	</insert>
+
+	<delete id="deleteApprovalT" parameterType="Integer">
+		DELETE FROM approval
+		WHERE apno=#{apno}
+	</delete>
+	<delete id="deleteAppersonT" parameterType="Integer">
+		DELETE FROM apperson
+		WHERE apno=#{apno}
+	</delete>
+
+	<select id="ApnoForDoAp"
+		parameterType="com.ehr.web.approval.ApprovalDTO" resultType="Map">
+		SELECT
+		apno
+		FROM apperson
+		WHERE apperson=#{eno}
+	</select>
+
+	<select id="ApListForDoAp" parameterType="java.util.List">
+		SELECT a.apperson, a.apno, a.apacptdetail, a.count, e.ename
+		FROM apperson a
+		JOIN employee e
+		ON a.apperson = e.eno
+		WHERE apno IN
+		<foreach collection="list" item="apnoMap" open="("
+			separator="," close=")">
+			#{apnoMap.apno}
+		</foreach>
+	</select>
+
+	<update id="doApproval" parameterType="Map">
+		UPDATE apperson
+		SET
+		apacptdetail=1
+		WHERE apno=#{apno} and apperson=#{eno}
+	</update>
+
+	<update id="notAp" parameterType="Map">
+		UPDATE apperson AS p, approval
+		AS a
+		SET p.apacptdetail=2, a.apmemo=#{apmemo}
+		WHERE p.apno=#{apno} and
+		p.apperson=#{eno} and a.apno=#{aApno}
+	</update>
+
+	<select id="getCount" parameterType="String" resultType="int">
+		SELECT count(*) FROM approval WHERE eno = (SELECT eno FROM employee WHERE
+		eid = #{eid})
+	</select>
+
+	<select id="approvalBoardList" parameterType="Map"
+		resultType="com.ehr.web.approval.ApprovalDTO">
+		SELECT @ROWNUM:=@ROWNUM+1 AS rowNum, apno, apdate, aptitle,
+		apcontent, aplist,  aprealfile, apmemo, eno
+		FROM approval,
+		(SELECT @ROWNUM:=0) AS R WHERE eno = #{eno} ORDER BY rowNum DESC LIMIT
+		#{offset}, #{pageSize}
+	</select>
+
+	<select id="getCountDoApprovalBoard" parameterType="String"
+		resultType="int">
+		SELECT count(*) FROM approval WHERE eno = (SELECT eno FROM employee WHERE
+		eid = #{eid})
+	</select>
+
+	<select id="ListForDoAp" parameterType="java.util.List">
+		SELECT aptitle, apcontent, aplist,  aprealfile, apdate, apno
+		FROM approval
+		WHERE apno IN
+		<foreach collection="list" item="apnoMap" open="("
+			separator="," close=")">
+			#{apnoMap.apno}
+		</foreach>
+		ORDER BY apdate DESC
+	</select>
+	<select id="doApprovalList" parameterType="Map"
+		resultType="com.ehr.web.approval.ApprovalDTO">
+		SELECT @ROWNUM:=@ROWNUM+1 AS rowNum, aptitle, apcontent,
+		aplist,  aprealfile, apdate, apno
+		FROM approval, (SELECT
+		@ROWNUM:=0) AS R
+		WHERE apno = any(SELECT DISTINCT apno FROM apperson WHERE apperson=#{eno})
+		ORDER BY rowNum DESC LIMIT #{offset}, #{pageSize}
+	</select>
+
+</mapper>

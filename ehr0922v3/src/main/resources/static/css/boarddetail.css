@@ -1,0 +1,115 @@
+@charset "UTF-8";
+#main{
+   margin: 0 auto;
+   width:95%;
+   margin-top: 60px;
+   color: black;
+}
+#detail{
+   background-color: white;
+   margin: 0 auto;
+   width: 90%;
+   height: auto;
+   margin-top: 15px;
+   color: black;
+   padding: 10px;
+   box-sizing: border-box;
+}
+#detailH{
+   height: 40px;
+   line-height: 40px;
+   font-size: x-large;
+   border-bottom: 1px solid black;
+   box-sizing: border-box;
+   overflow: hidden;
+}
+#detailIdDate{
+   height: 50px;
+   line-height: 30px;
+   border-bottom: 1px gray solid;
+   padding:10px;
+   box-sizing: border-box;
+   
+}
+#detailID, #detailDate{
+   width: 45%;
+   float: left;
+   text-align: left;
+}
+#detailDate{
+   float: right;
+   text-align: right;
+}
+#detailContent{
+   padding:10px;
+   min-height:300px;
+   height: auto;
+   border-bottom: 1px solid white;
+   box-sizing: border-box;
+   text-align: left;
+}
+
+.divTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.divTableCell{
+   border-bottom: 1px black solid;
+}
+
+.divTable .divTableHeading {
+    background-color: #f2f2f2;
+}
+
+.divTable .divTableHeading .divTableHead {
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+
+.divTable .divTableBody .divTableRow:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.divTable .divTableBody .divTableRow .divTableCell {
+    padding: 10px;
+    text-align: center;
+}
+
+
+.divTable .divTableBody .divTableRow .cdel:hover,
+.divTable .divTableBody .divTableRow .cedit:hover {
+    background-color: gray;
+}
+
+
+.container{
+   border: 1px black solid;
+
+}
+.divTableRow{
+   border-bottom: 1px black solid;
+   border-top:  1px black solid;
+}
+.divTableBody{
+      border-bottom: 1px black solid;
+}
+
+button{
+   border: 0;
+   background-color: #303F9F;;
+   border-radius: 7px;
+   padding: 7px;
+   color: white;
+   font-weight: bold;
+   font-family: 'Noto Sans KR', sans-serif;
+   width: 60px;
+   height: 40px;
+   margin: 10px;
+   margin-right: 0px;
+}
+button:hover{
+   cursor: pointer;
+   background-color: #1A237E;;
+}

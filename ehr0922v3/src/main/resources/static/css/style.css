@@ -1,0 +1,157 @@
+@charset "UTF-8";
+@import
+url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+* {
+   font-family: 'Noto Sans KR', sans-serif;
+}
+/* 공통설정 */
+:root {
+    --sidebar-width: 150px;
+    --sidebar-height: 100%;
+}
+
+body, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style:none;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+}
+
+a {
+    color: black;          
+    text-decoration: none;    
+}
+
+.home, .logout{
+	color: white;
+}
+
+#sidebar > ul ul {
+    display: none;
+}
+
+/*#navbar */
+#navbar{
+	z-index: 1;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: #303F9F;
+    color: black;
+    min-height: 8%;
+    border-bottom: 1px solid gray;
+
+}
+
+.navbar__menu{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+
+/*#main */
+#main{
+    display: flex;
+    min-height: 100%;
+}
+
+/*#sidebar */
+#sidebar {
+    position: fixed;
+    top: 7.7%;
+    left: 0; /* 좌측에 고정 */
+    background-color: #303F9F ;
+    width: 80px;
+    height: 100%; /* 화면 전체 높이로 설정 */
+    min-height: 100%; /* 내용이 화면을 넘치더라도 높이를 유지 */
+
+}
+
+#sidebar ul > li > a {
+    display: block;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* padding-left: 6px; */
+}
+
+
+#sidebar > ul > li > ul {
+    min-height: 100%;
+}
+
+/* #sidebar ul > li:hover{
+    background-color: #888;
+} */
+
+
+#sidebar > ul > li.active{
+    background-color: #888;
+}
+
+#sidebar ul > li.active > ul {
+    display: block;
+    position: absolute;
+    background-color: #3F51B5;
+    opacity: 0.9;
+    top: 0;  
+    left: 100%;    
+    width: 135%;   
+}
+
+#sidebar ul > li.active > a {
+    background-color: #7986CB;
+/*     border-bottom: 1px solid #999;*/
+}
+
+/* article */
+#article {
+    width: 70%;
+    margin : 7% 0% 1% var(--sidebar-width);
+    padding: 0.5% 20px 0 85px; /* 원하는 여백 값 설정 */
+}
+
+
+li{
+    text-align: center;
+    }
+
+
+/* .serarchinput {
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  margin-top: 2%;
+}
+
+.sub-search-icon {
+  position: relative; 
+  top: -42%;
+   right: -100%;
+} */
+.navbar_logo {
+  text-align: center; /* 가운데 정렬 */
+}
+.navimg{
+   width: 120px; 
+   border-radius: 0px;
+   border:none;
+    text-align: center;
+    height: 74px;
+    line-height: 74px;
+}

@@ -1,0 +1,262 @@
+@import
+url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+* {
+   font-family: 'Noto Sans KR', sans-serif;
+}
+body{
+   font-family: 'Noto Sans KR', sans-serif;
+}
+
+.title{
+   text-align: center;
+   font-size: xx-large;
+}
+
+.atList5{
+   border-top: 1px solid #424242;
+}
+
+th{
+   border-bottom: 1px solid #BDBDBD;
+   width: 200px;
+   height: 20px;
+   padding: 10px;
+}
+
+td{
+   border-bottom: 1px solid #BDBDBD;
+   width: 200px;
+   height: 30px;
+   padding: 10px;
+   text-align: center;
+}
+
+.atList {
+    width: 1200px;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.atList2{
+   width: 1000px;
+   height: 1200px;
+   margin: 0 auto;
+   padding: 20px;
+   border-radius: 15px;
+}
+
+.div-btn{
+   margin: 10px;
+   padding: 10px;
+   text-align: right;
+}
+
+button{
+   border: 0;
+   background-color: #303F9F;
+   border-radius: 7px;
+   padding: 7px;
+   color: white;
+   font-weight: bold;
+   font-family: 'Noto Sans KR', sans-serif;
+}
+button:hover{
+   cursor: pointer;
+   background-color: #1A237E;
+}
+
+.table{
+   border-collapse: collapse;
+   margin: auto;
+   text-align: center;
+   table-layout: fixed;
+}
+
+.td1{
+   width: 330px;
+   height: 30px;
+   padding: 10px;
+   margin:0px;
+}
+.td2{ 
+   width: 530px;
+   height: 10px;
+   padding: 5px;
+}
+
+.td1 input[type="text"] {
+  width: 87%; /* 입력 필드 너비를 100%로 설정하여 부모 요소에 맞게 조절합니다. */
+  box-sizing: border-box; /* 입력 필드의 패딩과 테두리를 포함한 너비를 조절합니다. */
+}
+
+.td2 input[type="text"]{
+  width: 43%; /* 입력 필드 너비를 100%로 설정하여 부모 요소에 맞게 조절합니다. */
+  box-sizing: border-box; /* 입력 필드의 패딩과 테두리를 포함한 너비를 조절합니다. */
+}
+.td3 input[type="text"] {
+  width: 96%; /* 입력 필드 너비를 100%로 설정하여 부모 요소에 맞게 조절합니다. */
+  box-sizing: border-box; /* 입력 필드의 패딩과 테두리를 포함한 너비를 조절합니다. */
+}
+.td3 input[type="password"] {
+  width: 233%; /* 입력 필드 너비를 100%로 설정하여 부모 요소에 맞게 조절합니다. */
+  box-sizing: border-box; /* 입력 필드의 패딩과 테두리를 포함한 너비를 조절합니다. */
+}
+input[type="password"],
+input[type="text"],
+.td2 input[type="password"],
+.edept,
+.egrade,
+.ehiredate,
+.egender,
+.ebank,
+input[type="file"],
+input[type="date"],
+.td select,
+.td2 input[type="date"] {
+  width: 100%; /* 입력 필드 너비를 100%로 설정하여 부모 요소에 맞게 조절합니다. */
+  box-sizing: border-box; /* 입력 필드의 패딩과 테두리를 포함한 너비를 조절합니다. */
+}
+input:disabled,
+button:disabled {
+  background-color: #eee; /* 배경색을 회색 또는 원하는 색상으로 변경 */
+  color: #999; /* 텍스트 색상을 회색 또는 원하는 색상으로 변경 */
+  cursor: not-allowed; /* 마우스 커서를 "not allowed"로 변경하여 사용자에게 클릭할 수 없음을 나타냄 */
+}
+
+input[type="text"], input[type="password"], input[type="date"], input[type="email"],
+   input[type="file"]{   
+   border-radius: 2px;
+   border: 0px solid rgba(0, 0, 0, 0.15);
+   outline: none;
+   -webkit-appearance: none;
+   vertical-align: middle;
+}
+
+input, optgroup, select{
+    font: inherit;
+    color: inherit;
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+    background-color: inherit;
+}
+
+.form_title .title_tip {
+
+   position: relative;
+   top: -0.083em;
+   font-size: .75em;
+   color: #FF5722;
+   padding: 0 0 0 0.417em;
+}
+
+.form.topline {
+   border-top: 0;
+}
+
+.form table {
+   width: 100%;
+}
+
+.form {
+   padding: 1.667em 0.833em;
+   border: 1px solid #ddd;
+}
+
+.form th.id {
+   width: 16.25em;
+}
+
+.form th {
+   width: auto;
+   height: 4.167em;
+   font-weight: 500;
+   text-align: right;
+   padding: 0.75em 0.833em;
+}
+
+.form th.id {
+   width: 16.25em;
+}
+
+.form th {
+   width: auto;
+   height: 4.167em;
+   font-weight: 500;
+   text-align: right;
+   padding: 0.75em 0.833em;
+}
+
+.form th, .form td {
+   color: #333;
+   vertical-align: top;
+}
+
+.form td {
+    width: auto;
+    text-align: left;
+    padding: 10px 0 0.833em;
+}
+.rrn-input-container{
+    display: flex;
+    justify-content: space-between;
+}
+.form_button{
+   float:right;
+   margin-right:120px;
+}
+
+.button_join {
+    width: 100px; /* 너비 조절 */
+    height: 50px; /* 높이 조절 */
+}
+.register_cancel_button{
+    width: 100px; /* 너비 조절 */
+    height: 50px; /* 높이 조절 */
+}
+
+input{
+   padding: 10px;
+   width: 90%;
+   border: 1px solid #BDBDBD;
+}
+
+select{
+   padding: 10px;
+   border: 1px solid #BDBDBD;
+   width: 90%;
+}
+select:hover{
+   cursor: pointer;
+}
+
+  .custom-file-input {
+    display: none; 
+  }
+
+  .custom-label {
+    border: 0;
+   background-color: #303F9F;
+   border-radius: 7px;
+   padding: 7px;
+   color: white;
+   font-weight: bold;
+   font-family: 'Noto Sans KR', sans-serif;
+   margin-right: 84%;
+       border-radius: 2px;
+    border: 0px solid rgba(0, 0, 0, 0.15);
+    outline: none;
+    -webkit-appearance: none;
+    vertical-align: middle;
+    border-radius: 7px;
+  }
+  
+  .custom-label:hover{
+   cursor: pointer;
+   background-color: #1A237E;
+}
+
+  .file-name {
+    margin-top: 10px;
+  }
+  

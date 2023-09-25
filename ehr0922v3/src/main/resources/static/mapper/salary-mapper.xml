@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ehr.web.salary.SalaryDAO">
+
+	<select id="elist" parameterType="Map" resultType="Map">
+		SELECT * FROM employee e JOIN salary s ON e.eno=s.eno WHERE DATE_FORMAT(s.sdate, '%Y-%m')=#{sdate} AND e.eno=#{eno};
+		</select>
+	
+	<select id="slist" parameterType="Map" resultType="Map">
+		SELECT * FROM salary s JOIN employee e ON e.eno=s.eno WHERE DATE_FORMAT(s.sdate, '%Y-%m')=#{sdate} AND e.eno=#{eno};
+	</select>
+	
+	<select id="searchSal" parameterType="Map" resultType="Map">
+		SELECT * FROM employee e JOIN salary s ON e.eno=s.eno WHERE DATE_FORMAT(s.sdate, '%Y-%m')=#{sdate} AND e.eno=#{eno};
+	</select>
+	
+	<select id="searchSal2" parameterType="Map" resultType="Map">
+		SELECT * FROM salary s JOIN employee e ON e.eno=s.eno WHERE DATE_FORMAT(s.sdate, '%Y-%m')=#{sdate} AND e.eno=#{eno};
+	</select>
+	
+	<select id="list" parameterType="Map" resultType="Map">
+	    <![CDATA[
+	    SELECT * FROM adsalary
+	    ]]>
+	    <where>
+	        <if test="scstrdate != null">AND scstrdate LIKE CONCAT('%', #{scstrdate}, '%') </if>
+	        <if test="scenddate != null">AND scenddate LIKE CONCAT('%', #{scenddate}, '%') </if>
+	        <if test="edept != null">AND edept LIKE CONCAT('%', #{edept}, '%') </if>
+	        <if test="egrade != null">AND egrade LIKE CONCAT('%', #{egrade}, '%') </if>
+	        <if test="estate != null">AND estate LIKE CONCAT('%', #{estate}, '%') </if>
+	        <if test="eid != null">AND eid LIKE CONCAT('%', #{eid}, '%') </if>
+	        <if test="ename != null">AND ename LIKE CONCAT('%', #{ename}, '%') </if>
+	    </where>
+	    <![CDATA[
+	    ORDER BY sno DESC LIMIT #{offset}, #{pageSize};
+	    ]]>
+	</select>
+	
+	<insert id="save" parameterType="Map"> 
+	    INSERT INTO salary (sdate, snation, shealth, scare, shire, stake, sreal, ssalary, sannualsal, sbasesal, seat, scstrdate, scenddate, eno) 
+	    VALUES (#{sdate}, #{snation}, #{shealth}, #{scare}, #{shire}, #{stake}, #{sreal}, #{ssalary}, #{sannualsal}, #{sbasesal}, #{seat}, #{scstrdate}, #{scenddate}, (SELECT eno FROM employee WHERE eid=#{eid}));
+	</insert>
+	
+	<select id="getCount" parameterType="Integer" resultType="Integer">
+        SELECT count(*) FROM adsalary;
+    </select>
+    
+    <select id="searchEmp" parameterType="Integer" resultType="Map">
+        SELECT ename, edept, egrade, estate FROM employee WHERE eid=#{eid};
+    </select>
+    
+    <select id="eidList" resultType="Map">
+        SELECT eid FROM employee;
+    </select>
+    
+	<delete id="deleteRows" parameterType="List">
+	    DELETE FROM salary WHERE sno IN 
+	    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	    </foreach>
+	</delete>
+    
+</mapper>

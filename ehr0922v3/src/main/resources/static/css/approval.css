@@ -1,0 +1,58 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+*{
+   	font-family: 'Noto Sans KR', sans-serif;	
+}
+html, body {
+  overflow: hidden; /* 스크롤 제거 */
+}
+.card-title {
+	text-align: center;
+	padding-left: 100px;
+}
+
+.atList2 {
+	position: relative;
+	left: 80px;
+   	height: 800px;
+   	margin: 0 auto;
+   	padding: 50px 50px 50px 50px;
+   	background-color: white;
+}
+
+#colMd, #colFile {
+	position: relative;
+	left: 590px;
+	top: -630px;
+}
+
+#colMd2, #colText { 
+	position: relative;
+	left: 590px;
+	top: -620px;
+}
+
+#colMd3, #colApp {
+	float: right;
+	position: relative;
+	left: 590px;
+	top: -600px;
+}
+
+.btn-info {
+	position: relative;
+	left: 590px;
+	top: -560px;
+	background-color: #303F9F ;
+   	border-radius: 7px;
+   	padding: 10px;
+   	color: white;
+   	font-weight: bold;
+}
+.btn-info:hover{
+	background-color: #1A237E;
+}
+.card-body {
+	height: 400px;
+}
+

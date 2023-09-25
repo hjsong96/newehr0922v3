@@ -1,0 +1,108 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+*{   
+   font-family: 'Noto Sans KR', sans-serif;   
+}
+.title{
+   text-align: center;
+   font-size: xx-large;
+}
+h1{
+   color: #424242;
+}
+.atList{   
+   width: 1330px;
+   height: 1000px;
+   margin: 0 auto;
+   text-align: center;
+}
+.atList2{
+   width: 1230px;
+   height: 800px;
+   margin: 0 auto;
+   background-color: white;
+   text-align: center;
+}
+.atList5{
+   border-top: 1px solid #424242;
+}
+hr{
+   border: 1px solid #FFF3E0;
+}
+.table1{
+   border-collapse: collapse;
+   margin: 0 auto;
+   text-align: center;
+   table-layout: fixed;
+}
+.th1{
+   border-bottom: 1px solid #BDBDBD;
+   width: 100px;
+   height: 10px;
+   padding: 10px;
+   table-layout: fixed;
+}
+.td1{
+   border-bottom: 1px solid #BDBDBD;
+   width: 100px;
+   min-width: 100px;
+   max-width: 100px;
+   height: 10px;
+   padding: 5px;
+   table-layout: fixed;
+   overflow:hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   table-layout: fixed;
+}
+.page-div{
+   margin: 0 auto;
+   padding: 10px;
+   text-align:center;
+}
+.page{
+   border: 0;
+   background-color: white;
+   color: black;
+}
+.page:hover, a:hover{
+   color: #FFB74D;
+   font-weight: bold;
+}
+a{
+   text-decoration: none;
+   padding: 7px;
+   color: black;
+}
+a.active{
+   color: #FFB74D;
+   font-weight: bold;
+}
+.page-a.active{
+   color: #FFB74D;
+   font-weight: bold;   
+}
+select{
+   padding: 10px;
+   border: 1px solid #BDBDBD;
+   width: 90%;
+}
+select:hover{
+   cursor: pointer;
+}
+textarea{
+   resize: none;
+   border: 1px solid #BDBDBD;
+}
+button{
+   border: 0;
+   background-color: #303F9F;
+   border-radius: 7px;
+   padding: 10px;
+   color: white;
+   font-weight: bold;
+}
+button:hover{
+   cursor: pointer;
+   background-color: #1A237E;
+}

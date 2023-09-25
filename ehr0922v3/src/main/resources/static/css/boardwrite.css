@@ -1,0 +1,33 @@
+@charset "UTF-8";
+#card{
+   width: 500px;
+}
+#ntitle{
+   width: 100%;
+}
+#abtitle{
+    width: 100%;
+}
+.saveBtn{
+float:right;
+}
+.writer{
+float : left;
+}
+button{
+   border: 0;
+   background-color: #303F9F;
+   border-radius: 7px;
+   padding: 7px;
+   color: white;
+   font-weight: bold;
+   font-family: 'Noto Sans KR', sans-serif;
+   width: 100px;
+   height: 40px;
+   margin: 10px;
+   margin-right: 0px;
+}
+button:hover{
+   cursor: pointer;
+   background-color: #1A237E;
+}
