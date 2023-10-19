@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>지식소프트</title>
+<title>지식소프트</title>  
 <link href="css/main.css" rel="stylesheet" />
 <script src="./js/jquery-3.7.0.min.js"></script>
 <link rel="stylesheet"
