@@ -26,7 +26,7 @@
 					$.ajax({
 						url : "./searchSal",
 						type : "post",
-						data : {
+						data : {  
 							"eno" : eno,
 							"sdate" : sdate
 						},
